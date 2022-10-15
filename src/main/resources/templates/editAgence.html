@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout.html"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Agences</title>
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+               Modifier Agence
+            </div>
+            <div class="panel-body">
+                <form th:action="@{/admin/save}" method="post">
+
+                    <div class="form-group">
+                        <label class="control-label">ID:</label><label th:text="${agences.idAgence}"></label>
+                        <input class="form-control" type="hidden" name="idAgence" th:value="${agences.idAgence}"
+                               required>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nom Agence</label>
+                        <input class="form-control" type="text" name="titleAgence" th:value="${agences.titleAgence}"
+                               required>
+                        <span th:errors="${agences.titleAgence}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Adresse</label>
+                        <input class="form-control" type="text" name="adresseAgence" th:value="${agences.adresseAgence}"
+                               required>
+                        <span th:errors="${agences.adresseAgence}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Telephone</label>
+                        <input class="form-control" type="text" name="telAgence" th:value="${agences.telAgence}"
+                               required>
+                        <span th:errors="${agences.telAgence}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Start Cap</label>
+                        <input class="form-control" type="text" name="startCapAgence"
+                               th:value="${agences.startCapAgence}" required>
+                        <span th:errors="${agences.startCapAgence}"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enregister</button>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

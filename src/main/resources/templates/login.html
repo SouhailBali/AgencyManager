@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout.html"
+>
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <meta charset="UTF-8">
+    <title>Agences</title>
+
+<script>
+    $(function() {
+
+        $('#login-form-link').click(function(e) {
+            $("#login-form").delay(100).fadeIn(100);
+            $("#register-form").fadeOut(100);
+            $('#register-form-link').removeClass('active');
+            $(this).addClass('active');
+            e.preventDefault();
+        });
+        $('#register-form-link').click(function(e) {
+            $("#register-form").delay(100).fadeIn(100);
+            $("#login-form").fadeOut(100);
+            $('#login-form-link').removeClass('active');
+            $(this).addClass('active');
+            e.preventDefault();
+        });
+
+    });
+</script>
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel panel-login">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <a href="#" class="active" id="login-form-link">Login</a>
+                            </div>
+                            <div class="col-xs-6">
+                                <a href="#" id="register-form-link">Register</a>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <form id="login-form" th:action="@{/login}" method="post" role="form" style="display: block;">
+                                    <div th:if="${param.error}">
+                                        <p class="text-danger">nom d'utilisateur ou mot de passe incorrect</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="username"  tabindex="1" class="form-control" placeholder="Username" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="password"  tabindex="2" class="form-control" placeholder="Password">
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+                                        <label for="remember"> Remember Me</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-sm-offset-3">
+                                                <input type="submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log in">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+
+                                    </div>
+                                </form>
+                         <form id="register-form" th:action="@{/client/ajouter}" method="post" role="form" style="display: none;">
+                                    <div class="form-group">
+                                        <input type="text" name="prenomClient" id="usernamee"  tabindex="1" class="form-control" placeholder="Votre Username" th:value="${client.prenomClient}" >
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="nomClient" id="username"  tabindex="1" class="form-control" placeholder="Votre nom" th:value="${client.nomClient}">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" name="adresseClient" id="usernam" tabindex="1" class="form-control" placeholder="Votre adresse" th:value="${client.adresseClient}" >
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="number" name="ageClient" min="18" max="130" id="userna"  tabindex="1" class="form-control" placeholder="Votre Age" th:value="${client.ageClient}">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" name="emailClient" id="email" tabindex="1"  class="form-control" placeholder="Email Address" th:value="${client.emailClient}" >
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="passwordClient" id="password" tabindex="2"  class="form-control" placeholder="Password" th:value="${client.passwordClient}">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" name="confirm-password" id="confirm-password"   tabindex="2" class="form-control" placeholder="Confirm Password">
+                                    </div>
+
+                                        <div  class="form-group">
+                                            <select name="agenceClient"   class="form-control" id="sl1"  required>
+                                                <option >Veuillez choisir une agence</option>
+                                                <option th:each="a:${listAgences}" th:text="${a.titleAgence}" th:value="${client.agenceClient}" ></option>
+                                            </select>
+                                        </div>
+
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-sm-offset-3">
+                                                <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout.html"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Societes</title>
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Nouvelle Societe
+            </div>
+            <div class="panel-body">
+                <form th:action="@{/admin/savesociete}" method="post">
+
+                    <div class="form-group">
+                        <label class="control-label">Nom societe</label>
+                        <input class="form-control" type="text" name="nomSociete" th:value="${societe.nomSociete}" required>
+                        <span th:errors="${societe.nomSociete}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Adresse</label>
+                        <input class="form-control" type="text" name="adresseSociete" th:value="${societe.adresseSociete}" required>
+                        <span th:errors="${societe.adresseSociete}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Telephone</label>
+                        <input class="form-control" type="text" name="telSociete" th:value="${societe.telSociete}" required>
+                        <span th:errors="${societe.telSociete}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Email</label>
+                        <input class="form-control" type="text" name="emailSociete" th:value="${societe.emailSociete}" required>
+                        <span th:errors="${societe.emailSociete}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Valeur Risque</label>
+                        <input class="form-control" type="text" name="valeurRisquesociete" th:value="${societe.valeurRisquesociete}" required>
+                        <span th:errors="${societe.valeurRisquesociete}"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enregister</button>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

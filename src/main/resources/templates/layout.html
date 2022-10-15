@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en"
+
+    >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+
+<nav class="navbar navbar-default" style="background-color: #222222; color: #afd9ee; border-color:#222222; " >
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/login}">ManagerDeSociété</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li ><a th:href="@{/user/index}">Agences</a></li>
+            <li><a th:href="@{/user/indexsociete}">Sociétés</a></li>
+            <li><a href="#">A propos</a></li>
+        </ul>
+
+
+       <ul sec:authorize="isAuthenticated()" class="nav navbar-nav pull-right">
+            <li class="nav-item dropdown">
+                <a style="background-color: #666666" class="nav-link dropdown-toggle" th:href="@{/login?logout}">
+                <span class="glyphicon glyphicon-log-out" sec:authentication="name"></span></a></li></ul>
+                <ul class="dropdown-menu">
+
+                </ul>
+
+
+
+    </div>
+</nav>
+<section layout:fragment="content1">
+
+</section>
+<footer>
+    <div class="navbar navbar-inverse navbar-fixed-bottom">
+        <div style="display: flex;align-items: center;justify-content: center;" class="container">
+            <p  class="navbar-text">© Copyright by Us</p>
+        </div>
+    </div>
+</footer>
+</body>
+
+</html>

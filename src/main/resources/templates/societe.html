@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="layout.html"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Societes</title>
+</head>
+<body>
+<div layout:fragment="content1">
+    <div class="container" style="padding-top:5%;">
+        <div class="panel panel-primary" style=" border-color: #5bc0de;border:.015em solid #345B63;">
+            <div class="panel-heading" style="background-color: #5bc0de;border-color: #5bc0de;font-weight:bold">Liste des societes</div>
+            <div class="panel-body">
+                <form th:action="@{/user/indexsociete}" method="get">
+                    <label>
+                        Mot cle:
+                    </label>
+                    <input type="text" name="motCle" th:value="${motCle}">
+                    <button type="submit" class="btn btn-primary" style="
+                    display: inline-block;
+                    outline: none;
+                    cursor: pointer;
+                    border-radius: 3px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 16px;
+                    padding: 2px 16px;
+                    height: 38px;
+                    min-width: 96px;
+                    min-height: 38px;
+                    border: none;
+                    color: #fff;
+                    background-color: rgb(88, 101, 242);
+                    transition: background-color .17s ease,color .17s ease;
+                    :hover {
+                        background-color: rgb(71, 82, 196);
+                    }
+                ">chercher </button>
+                    <a style="float: right;
+
+                display: inline-block;
+                outline: 0;
+                border: 0;
+                cursor: pointer;
+                will-change: box-shadow,transform;
+                background: radial-gradient( 100% 100% at 100% 0%, #89E5FF 0%, #5468FF 100% );
+                box-shadow: 0px 2px 4px rgb(45 35 66 / 40%), 0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px rgb(58 65 111 / 50%);
+                padding: 0 15px;
+                border-radius: 6px;
+                color: #fff;
+                height: 30px;
+                font-size: 18px;
+                text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+                transition: box-shadow 0.15s ease,transform 0.15s ease;
+                :hover {
+                    box-shadow: 0px 4px 8px rgb(45 35 66 / 40%), 0px 7px 13px -3px rgb(45 35 66 / 30%), inset 0px -3px 0px #3c4fe0;
+                    transform: translateY(-2px);
+                }
+                :active{
+                    box-shadow: inset 0px 3px 7px #3c4fe0;
+                    transform: translateY(2px);
+                }
+                "  sec:authorize="hasRole('ADMIN')" th:href="@{/admin/formSociete}">Ajouter une societe</a>
+                </form>
+
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <tr>
+                        <th hidden>ID</th>
+                        <th>Nom societe</th>
+                        <th>Adresse</th>
+                        <th>Telephone</th>
+                        <th>email</th>
+                        <th>valeur risque</th>
+                    </tr> <tr  th:each="a:${listSociete}">
+
+                        <td th:text="${a.idSociete}" hidden></td>
+                     <td ><a th:text="${a.nomSociete}" th:href="@{/user/SocieteInfo(id=${a.idSociete})}"></a></td>
+                        <td th:text="${a.adresseSociete}"></td>
+                        <td th:text="${a.telSociete}"></td>
+                        <td th:text="${a.emailSociete}"></td>
+                        <td th:text="${a.valeurRisquesociete}">DH</td>
+                        <td sec:authorize="hasRole('ADMIN')">
+                            <a style="
+                    display: inline-block;
+                    outline: none;
+                    cursor: pointer;
+                    font-size: 14px;
+                    padding: 0 12px;
+                    line-height: 20px;
+                    height: 30px;
+                    max-height: 30px;
+                    background: none;
+                    font-weight: 700;
+                    border: 0;
+                    border-radius: 0;
+                    color: #D92736;
+                    transition-timing-function: ease-in-out;
+                    transition-property: background;
+                    transition-duration: 150ms;
+                    box-shadow: none;
+                    :hover {
+                        background: #F7F9FD;
+                    }
+                "  onclick="return confirm('Etes vous sure?')" th:href="@{/admin/deletesociete(id=${a.idSociete},page=${CurrentPage},motCle=${motCle})}">
+                                Delete
+                            </a>
+                        </td>
+                        <td sec:authorize="hasRole('ADMIN')">
+                            <a style=" display: inline-block;
+                    outline: none;
+                    cursor: pointer;
+                    font-size: 14px;
+                    padding: 0 12px;
+                    line-height: 20px;
+                    height: 30px;
+                    max-height: 30px;
+                    background: none;
+                    font-weight: 700;
+                    border: 0;
+                    border-radius: 0;
+                    color: #1CB94E;
+                    transition-timing-function: ease-in-out;
+                    transition-property: background;
+                    transition-duration: 150ms;
+                    box-shadow: none;
+                    :hover {
+                        background: #1CB94A;
+                    }" class="btn btn-danger"  th:href="@{/admin/editsociete(id=${a.idSociete})}">
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+                <ul class="nav nav-pills">
+                    <li th:class="${CurrentPage==status.index}?'active':''" th:each="page,status:${pages}">
+                        <a th:href="@{/user/indexsociete(page=${status.index},motCle=${motCle})}" th:text="${status.index}"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
